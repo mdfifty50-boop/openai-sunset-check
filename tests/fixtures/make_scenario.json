@@ -1,0 +1,1 @@
+{"name":"Support triage","flow":[{"id":1,"module":"gateway:CustomWebHook","mapper":{}},{"id":2,"module":"openai-gpt-3:CreateCompletion","mapper":{"model":"gpt-4.1-mini","messages":[{"role":"user","content":"{{1.body}}"}]}},{"id":3,"module":"openai-gpt-3:TranscribeAudio","mapper":{"model":"whisper-1"}}],"metadata":{"version":1}}

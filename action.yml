@@ -1,0 +1,34 @@
+name: "OpenAI Sunset Check"
+description: "Find retiring OpenAI models and endpoints (gpt-4o, o3, gpt-5, whisper-1, tts-1...) with shutdown dates and replacements."
+author: "mdfifty50-boop"
+branding:
+  icon: "alert-triangle"
+  color: "orange"
+inputs:
+  path:
+    description: "Files or folders to scan, space separated"
+    required: false
+    default: "."
+  fail-within:
+    description: "Fail only if a finding shuts down within this many days (empty = fail on any finding)"
+    required: false
+    default: ""
+  no-fail:
+    description: "Set to 'true' to report findings without failing the job"
+    required: false
+    default: "false"
+runs:
+  using: "composite"
+  steps:
+    - name: Scan for retiring OpenAI models and endpoints
+      shell: bash
+      env:
+        OSC_PATHS: ${{ inputs.path }}
+        OSC_FAIL_WITHIN: ${{ inputs.fail-within }}
+        OSC_NO_FAIL: ${{ inputs.no-fail }}
+      run: |
+        args=()
+        if [ -n "$OSC_FAIL_WITHIN" ]; then args+=(--fail-within "$OSC_FAIL_WITHIN"); fi
+        if [ "$OSC_NO_FAIL" = "true" ]; then args+=(--no-fail); fi
+        # shellcheck disable=SC2086
+        python3 "${{ github.action_path }}/check.py" $OSC_PATHS "${args[@]}"
