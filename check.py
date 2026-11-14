@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """openai-sunset-check: find retiring OpenAI models and endpoints in a codebase.
 
-Zero dependencies (Python 3.8+ standard library). Usage: python check.py <path> [<path> ...]
+Zero dependencies (Python 3 standard library only). Usage: python check.py <path> [<path> ...]
 Deprecation table sourced from https://platform.openai.com/docs/deprecations.
 MIT License.
 """

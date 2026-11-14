@@ -2,7 +2,7 @@
 
 Scans your code, JSON/YAML configs and n8n/Make exports for OpenAI models and endpoints that are being retired, and prints each hit with its shutdown date and replacement.
 
-Zero dependencies: one Python file (3.8+ standard library), plus a GitHub Action.
+Zero dependencies: one Python file (standard library only; CI tests Python 3.10 and 3.13), plus a GitHub Action.
 
 ## Usage
 
