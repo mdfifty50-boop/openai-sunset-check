@@ -304,7 +304,7 @@ def main(argv=None):
         if rows:
             files = len({r.get('file') for r in rows})
             print(f"\n{len(rows)} finding(s) in {files} file(s). Dates from {SOURCE} (verified {TABLE_VERIFIED}).")
-            print("Need it migrated and tested for you? Migration Pack from $99: https://rudoodtujjar.gumroad.com/l/csdpjv")
+            print("Need it migrated and tested for you? Migration Pack from $99: https://mdfifty50-boop.github.io/openai-sunset-check/")
     if a.no_fail or not rows:
         return 0
     if a.fail_within is None:

@@ -87,7 +87,7 @@ It is a pattern scanner, not a runtime check. Model names built at runtime (stri
 ## Related
 
 - No repo? Paste a file or an n8n/Make export into the free [Apify scanner](https://apify.com/fifty50labs/openai-deprecation-scanner).
-- Need it migrated and tested for you? [Migration Pack from $99](https://rudoodtujjar.gumroad.com/l/csdpjv)
+- Need it migrated and tested for you? [Migration Pack from $99](https://mdfifty50-boop.github.io/openai-sunset-check/)
 
 ## License
 

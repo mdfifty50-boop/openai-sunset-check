@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenAI Model Shutdown Fix · Fifty50 Labs</title>
+<meta name="description" content="OpenAI is retiring Agent Builder, /v1/prompts, gpt-5, o3, gpt-4o and gpt-4.1. We migrate your n8n, Make, Zapier or code workflows and test them before and after within 48 hours, or full refund.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-src https://*.gumroad.com https://gumroad.com; img-src 'self' data:">
+<meta property="og:title" content="OpenAI Model Shutdown Fix · Fifty50 Labs">
+<meta property="og:description" content="Migration + before/after test within 48 hours, or full refund. From $99.">
+<link rel="canonical" href="https://mdfifty50-boop.github.io/openai-sunset-check/">
+<style>
+:root{--ink:#14161a;--muted:#5d6370;--line:#e4e6ea;--bg:#fbfbfa;--card:#fff;--accent:#0f766e;--accent-soft:#e6f4f2;--warn:#b42318}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+header{padding:22px 0;border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center}
+.brand{font-weight:700;letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
+.brand span{color:var(--accent)}
+nav a{color:var(--muted);text-decoration:none;font-size:15px;margin-left:20px}
+.hero{padding-top:72px;padding-bottom:48px}
+.eyebrow{display:inline-block;font-size:13px;font-weight:600;color:var(--warn);background:#fdecea;border-radius:999px;padding:4px 12px;margin-bottom:18px}
+h1{font-size:clamp(32px,5vw,50px);line-height:1.08;letter-spacing:-.025em;margin:0 0 18px;max-width:760px}
+.lead{font-size:19px;color:var(--muted);max-width:640px;margin:0 0 30px}
+.btn{display:inline-block;padding:13px 22px;border-radius:10px;font-weight:600;text-decoration:none;font-size:16px;border:1px solid var(--ink);color:var(--ink);background:transparent}
+.btn.primary{background:var(--ink);color:#fff}
+.btn+.btn{margin-left:10px}
+section{padding:48px 0;border-top:1px solid var(--line)}
+h2{font-size:26px;letter-spacing:-.015em;margin:0 0 22px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
+th{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600;background:#f6f7f8}
+tr:last-child td{border-bottom:0}
+td.date{white-space:nowrap;font-weight:600}
+code{font:14px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#f1f2f4;padding:1px 6px;border-radius:5px}
+.note{color:var(--muted);font-size:14px;margin-top:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;counter-increment:s}
+.steps li:before{content:counter(s);display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;align-items:center;justify-content:center;margin-bottom:12px}
+.steps b{display:block;margin-bottom:4px}
+.steps p{margin:0;color:var(--muted);font-size:15px}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
+.tier{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px;display:flex;flex-direction:column}
+.tier.hl{border:2px solid var(--accent);box-shadow:0 18px 40px -24px rgba(15,118,110,.45)}
+.tag{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;min-height:18px}
+.tier h3{margin:0 0 6px;font-size:18px}
+.price{font-size:40px;font-weight:700;letter-spacing:-.02em;margin:4px 0 14px}
+.tier ul{padding-left:18px;margin:0 0 22px;color:var(--muted);font-size:15px;flex:1}
+.tier .btn{text-align:center}
+.tier.hl .btn{background:var(--accent);border-color:var(--accent);color:#fff}
+.free{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.free a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;text-decoration:none;color:var(--ink)}
+.free a b{display:block;margin-bottom:4px}
+.free a span{color:var(--muted);font-size:15px}
+footer{border-top:1px solid var(--line);padding:32px 0 48px;color:var(--muted);font-size:14px}
+@media (max-width:760px){
+  .steps,.tiers,.free{grid-template-columns:1fr}
+  .hero{padding-top:48px;padding-bottom:32px}
+  nav{display:none}
+  .btn+.btn{margin:10px 0 0}
+  th:nth-child(3),td:nth-child(3){display:none}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="brand" href="./">Fifty50 <span>Labs</span></a>
+  <nav><a href="#dates">Dates</a><a href="#how">How it works</a><a href="#pricing">Pricing</a></nav>
+</div></header>
+
+<main>
+<div class="wrap hero">
+  <div class="eyebrow">First shutdown: 30 Nov 2026</div>
+  <h1>OpenAI is switching off the models your automations run on.</h1>
+  <p class="lead">We move your n8n, Make, Zapier, Python or Node workflows to the replacement model and test them on your own inputs, before and after, within 48 hours. Not fixed in 48 hours, full refund.</p>
+  <a class="btn primary" href="#pricing">See pricing</a><a class="btn" href="#scan">Free scan first</a>
+</div>
+
+<section id="dates"><div class="wrap">
+  <h2>What shuts down, and when</h2>
+  <table>
+    <thead><tr><th>Shutdown</th><th>Affected</th><th>Replacement</th></tr></thead>
+    <tbody>
+      <tr><td class="date">30 Nov 2026</td><td>Agent Builder, <code>/v1/prompts</code> (reusable prompt objects)</td><td>Agents SDK; prompts in your own code</td></tr>
+      <tr><td class="date">11 Dec 2026</td><td><code>gpt-5</code> family, <code>o3</code></td><td><code>gpt-6.1-sol</code> and siblings</td></tr>
+      <tr><td class="date">14 Jan 2027</td><td><code>gpt-4o</code>, <code>gpt-4o-mini</code>, <code>gpt-4.1</code>, <code>gpt-4.1-mini</code>, including fine-tunes</td><td><code>gpt-6-luna</code></td></tr>
+    </tbody>
+  </table>
+  <p class="note">Source: <a href="https://platform.openai.com/docs/deprecations" rel="noopener">platform.openai.com/docs/deprecations</a>, checked 14 Nov 2026. Anything still calling these stops working on the date.</p>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <h2>How it works</h2>
+  <ol class="steps">
+    <li><b>Free scan</b><p>Run the free scanner on your workflow export or code to see what is affected and how many workflows.</p></li>
+    <li><b>Pick a tier</b><p>Choose by workflow count. After purchase, reply to the receipt with your export and a restricted OpenAI API key for testing.</p></li>
+    <li><b>We migrate and test</b><p>Switched to the replacement model, plus a before/after run on up to 20 of your real inputs and the cost difference per 1,000 calls. Within 48 hours, or full refund.</p></li>
+  </ol>
+  <p class="note">Test tokens are billed to your own API key.</p>
+</div></section>
+
+<section id="pricing"><div class="wrap">
+  <h2>Pricing</h2>
+  <div class="tiers">
+    <div class="tier">
+      <div class="tag"></div>
+      <h3>1 workflow</h3>
+      <div class="price">$99</div>
+      <ul><li>One workflow or script migrated</li><li>Before/after test report</li><li>48 hours or full refund</li></ul>
+      <a class="btn" href="https://rudoodtujjar.gumroad.com/l/csdpjv?wanted=true&amp;option=wjNL0-ClvLM_DxD5Fu8eeg%3D%3D" data-checkout data-checkout-title="OpenAI Shutdown Fix · 1 workflow">Buy · $99</a>
+    </div>
+    <div class="tier hl">
+      <div class="tag">Best value</div>
+      <h3>Up to 5 workflows</h3>
+      <div class="price">$249</div>
+      <ul><li>Up to 5 workflows or scripts migrated</li><li>Before/after test report for each</li><li>48 hours or full refund</li></ul>
+      <a class="btn" href="https://rudoodtujjar.gumroad.com/l/csdpjv?wanted=true&amp;option=Nb_a0vva_h7QGA6UTZkumg%3D%3D" data-checkout data-checkout-title="OpenAI Shutdown Fix · Up to 5 workflows">Buy · $249</a>
+    </div>
+    <div class="tier">
+      <div class="tag"></div>
+      <h3>Up to 15 workflows</h3>
+      <div class="price">$490</div>
+      <ul><li>Up to 15 workflows or scripts migrated</li><li>Agent Builder rebuild</li><li>Before/after test report for each</li><li>48 hours or full refund</li></ul>
+      <a class="btn" href="https://rudoodtujjar.gumroad.com/l/csdpjv?wanted=true&amp;option=_whJvzppi1lxkMPHHnFAYQ%3D%3D" data-checkout data-checkout-title="OpenAI Shutdown Fix · Up to 15 workflows">Buy · $490</a>
+    </div>
+  </div>
+  <p class="note">Secure checkout opens on this page, processed by Gumroad.</p>
+</div></section>
+
+<section id="scan"><div class="wrap">
+  <h2>Free scanner</h2>
+  <div class="free">
+    <a href="https://apify.com/fifty50labs/openai-deprecation-scanner" rel="noopener"><b>Apify scanner</b><span>Paste a file or an n8n/Make export. No install.</span></a>
+    <a href="https://github.com/mdfifty50-boop/openai-sunset-check" rel="noopener"><b>GitHub CLI + Action</b><span>Zero-dependency Python script, or gate your CI.</span></a>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  Questions: <a href="mailto:hello@atmitli.com">hello@atmitli.com</a> · Fifty50 Labs · Not affiliated with OpenAI.
+</div></footer>
+
+<script src="brand-checkout.js" defer data-brand="Fifty50 Labs" data-accent="#0f766e" data-lang="en" data-store="rudoodtujjar"></script>
+</body>
+</html>
